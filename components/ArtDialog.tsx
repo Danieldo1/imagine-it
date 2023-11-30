@@ -2,6 +2,7 @@ import React from "react";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../components/ui/dialog";
 import { Button } from "./ui/button";
 import {Loader2} from "lucide-react"
+import Image from "next/image";
 
 
 
@@ -44,7 +45,7 @@ const ArtDialog: React.FC<ArtDialogProps> = ({
           </DialogHeader>
           {artsQuery && artsQuery.length > 0 && artsQuery[0].result && (
             <>
-              <img
+              <Image
                 src={artsQuery[0].result}
                 className="max-w-full h-auto rounded-xl"
                 alt="Art result"
