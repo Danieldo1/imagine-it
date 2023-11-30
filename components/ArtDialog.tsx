@@ -44,13 +44,16 @@ const ArtDialog: React.FC<ArtDialogProps> = ({
             <DialogDescription>{promptValue}</DialogDescription>
           </DialogHeader>
           {artsQuery && artsQuery.length > 0 && artsQuery[0].result && (
-            <>
+            <div className='w-full h-full'>
               <Image
+              width={512}
+              height={512}
+           
                 src={artsQuery[0].result}
-                className="max-w-full h-auto rounded-xl"
+                className="max-w-full h-auto' rounded-xl"
                 alt="Art result"
               />
-            </>
+            </div>
           )}
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
