@@ -45,8 +45,8 @@ const Home = () => {
           <p className="text-[#5a0b1c] font-bold pb-8 lg:pb-6 text-center text-3xl">
             Get Started:
           </p>
-          <div className="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
-            <Link href="/generate" className="h-12 pr-12 transform hover:scale-125 duration-300 ease-in-out" >
+          <div className="flex w-full items-center justify-center md:justify-start pb-24 lg:pb-0 fade-in">
+            <Link href="/generate" className="h-12 pr-12 transform  hover:scale-125 duration-300 ease-in-out" >
                 <Button>
                     Generate
                 </Button>
