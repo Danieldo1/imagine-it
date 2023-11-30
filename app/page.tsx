@@ -1,109 +1,72 @@
-'use client'
+import Link from 'next/link'
+import React from 'react'
+import { Button } from '../components/ui/button'
+import { Redo } from 'lucide-react'
 
-import { Input } from "../components/ui/input";
-import { Label } from "../components/ui/label";
-import { Button } from "../components/ui/button";
-
-import { useMutation, useQuery } from "convex/react";
-import { useRef, useState } from "react"
-import { useForm, SubmitHandler } from "react-hook-form"
-import { ReactSketchCanvas, ReactSketchCanvasRef } from "react-sketch-canvas"
-import { api } from "../convex/_generated/api";
-import { Eraser, PenLine, Trash2} from "lucide-react"
-import {ReactSketchCanvasProps} from "react-sketch-canvas"
-
-import ArtDialog from "../components/ArtDialog";
-
-
-
-
-
-export default function Home() {
- const [artsIds, setArtsIds] = useState('')
- const [promptValue, setPromptValue] = useState('')
- const [isLoading, setIsLoading] = useState(false);
- const [isEraseMode, setIsEraseMode] = useState(true);
-
-const saveArtMutation = useMutation(api.art.uploadArt) 
-//@ts-ignore
-const artsQuery = useQuery(api.art.getArts,{artsIds})
-const canvasRef = useRef<ReactSketchCanvasRef>(null)
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<{ prompt: string}>()
-
-  const filteredArts = (artsQuery ?? []).sort((x,y) => {
-    return y._creationTime - x._creationTime
-   })
-//    const toggleEraseMode = () => {
-//     // Toggle the erase mode state
-//     setIsEraseMode(!isEraseMode);
-//  canvasRef?.current?.eraseMode(isEraseMode);
-//   };
-
-  
+const Home = () => {
+    const headerStyle = {
+        backgroundImage: "url('/header.png')"
+      }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between pt-2 my-4 ">
-      <div className="container mx-auto flex flex-col flex-wrap items-center ">
-        <form
-          className="flex flex-col gap-2 "
-          onSubmit={handleSubmit(async (formData) => {
-            setIsLoading(true);
-            if (!canvasRef.current) return;
-            const image = await canvasRef.current.exportImage("jpeg");
-            const result = await saveArtMutation({ ...formData, image });
-            //@ts-ignore
-            setArtsIds(result.id)
-            setIsLoading(false);
-          })}
-        >
-          <Label className="mt-4 text2 text-3xl ">Doodle it !</Label>
-            <ReactSketchCanvas
-              svgStyle={{borderRadius: 7}}
-              ref={canvasRef}
-              width="40vh"
-              height="40vh"
-              style={{ borderRadius: 10 }}
-              strokeWidth={4}
-              strokeColor="black"
-              className="w-1/2 shadow-lg cursor-cell"
-              allowOnlyPointerType = 'all'
-              // @ts-ignore
-              eraser={isEraseMode}
-              />
-              <div className="flex gap-2 w-full justify-between">
-               <Button type="button" variant={"outline"} onClick={()=> {
-                  setIsEraseMode(!isEraseMode);
-                  canvasRef?.current?.eraseMode(isEraseMode);
-               }}>
-        {isEraseMode ? (<Eraser className="w-8 h-8" />) : (<PenLine className="w-8 h-8" />)}
-      </Button>
-          <Button
-            type="button"
-            variant={"outline"}
-            onClick={() => {
-              canvasRef.current?.clearCanvas();
-            }}
-            className="text1 font-medium"
-          >
-            <Trash2 className="w-8 h-8"/>
-          </Button>
-              </div>
-          <Label htmlFor="prompt" className="text2 text-3xl">Describe it</Label>
-          <Input autoComplete="off" id="prompt" {...register("prompt", { required: true })} onChange={(e) => setPromptValue(e.target.value)} className="w-full text1 font-medium  flex-1" />
-          {errors.prompt && <span>This field is required</span>}
-        
-          <Button type="submit" className="text2 font-bold text-3xl">Submit it</Button>
-        </form>
-       
-        <ArtDialog isLoading={isLoading} promptValue={promptValue} artsQuery={artsQuery} />
+    <section className="leading-normal tracking-normal bg-cover bg-fixed" style={headerStyle}>
+    <div className="h-full">
+      {/* <!--Main--> */}
+      <div className="container pt-24 md:pt-3 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+        {/* <!--Left Col--> */}
+        <div className="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
+          <h1 className="my-4 text-3xl md:text-5xl text-primary opacity-75 font-bold leading-tight text-center md:text-left">
+          Unleash Your Imagination,<br />
+            <span className="text-[#ca1a40] px-2  text-3xl md:text-5xl font-bold">
+            Refine Reality!
+            </span>
+          </h1>
+          <p className="leading-normal font-bold md:text-2xl text-[#b41739] mb-8 text-center md:text-left">
+          Draw-it - Transform Your Sketches into Stunning Realistic Art with AI Magic!
+          </p>
 
-       
-</div>
-    </main>
+          
+        </div>
+
+        {/* <!--Right Col--> */}
+        <div className="w-full xl:w-3/5 p-12 overflow-hidden">
+        <div>
+            <h2 className='text-2xl md:text-4xl text1 font-bold mb-4 text-[#9d1432]'>Turn a simple sketch like this into an amazing art!</h2>
+
+          </div>
+          <img className="mx-auto rounded-2xl w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-50" src="sketch.png" />
+        <Redo className='w-60 h-40  absolute z-10 rotate-[100deg] text-primary transform transition hover:scale-125 duration-700 ease-in-out hover:rotate-6' />
+        </div>
+        <div className="w-full xl:w-3/5 p-12 overflow-hidden">
+          <img className="mx-auto rounded-2xl  w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" src="result.png" />
+        </div>
+
+        <div className="mx-auto md:pt-16">
+          <p className="text-[#5a0b1c] font-bold pb-8 lg:pb-6 text-center text-3xl">
+            Get Started:
+          </p>
+          <div className="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
+            <Link href="/generate" className="h-12 pr-12 transform hover:scale-125 duration-300 ease-in-out" >
+                <Button>
+                    Generate
+                </Button>
+            </Link>
+            <Link href="/collection" className="h-12 text-primary pr-12 transform hover:scale-125 duration-300 ease-in-out" >
+            <Button variant={"ghost"} >
+                    See Collection &rarr;
+            </Button>
+            </Link>
+          </div>
+        </div>
+
+        {/* <!--Footer--> */}
+        <div className="w-full pt-16 pb-6 text-sm text-center md:text-left fade-in">
+          <a className="text-gray-500 no-underline hover:no-underline" href="#">&copy; DRAW-IT 2023</a>
+        </div>
+      </div>
+    </div>
+  </section>
   )
 }
+
+export default Home

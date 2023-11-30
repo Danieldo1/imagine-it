@@ -11,14 +11,17 @@ const Collection = () => {
    const filteredArts = (art ?? []).sort((x,y) => {
     return y._creationTime - x._creationTime
    })
+   const headerStyle = {
+    backgroundImage: "url('/header.png')"
+  }
   return (
-    <main className="flex min-h-screen flex-col items-center p-16">
+    <main className="flex min-h-screen flex-col items-center p-16 bg-cover bg-fixed" style={headerStyle}>
     <h2 className='text-3xl md:text-5xl text1 font-bold mb-4'>Recent Community Creations</h2>
     <p className='text-muted-foreground mb-4 text-md md:text-2xl'>Dive into the realm of artistry with our collection of recent creations. </p>
     {filteredArts.length > 0 ? (
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
     {filteredArts.map((art) => (
-      <div className='bg-white rounded-xl flex flex-col items-center  p-5 border'>
+      <div className='bg-white rounded-xl flex flex-col items-center  p-5 border border-muted-foreground shadow-xl'>
       <Image
         key={art._id}
         width="256"
