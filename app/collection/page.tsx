@@ -21,9 +21,8 @@ const Collection = () => {
     {filteredArts.length > 0 ? (
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
     {filteredArts.map((art) => (
-      <div className='bg-white rounded-xl flex flex-col items-center  p-5 border border-muted-foreground shadow-xl'>
+      <div key={art._id} className='bg-white rounded-xl flex flex-col items-center  p-5 border border-muted-foreground shadow-xl'>
       <Image
-        key={art._id}
         width="256"
         height="256"
         // @ts-ignore

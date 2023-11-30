@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { Button } from '../components/ui/button'
 import { Redo } from 'lucide-react'
+import Image from 'next/image'
 
 const Home = () => {
     const headerStyle = {
@@ -34,11 +35,11 @@ const Home = () => {
             <h2 className='text-2xl md:text-4xl text1 font-bold mb-4 text-[#9d1432]'>Turn a simple sketch like this into an amazing art!</h2>
 
           </div>
-          <img className="mx-auto rounded-2xl w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-50" src="sketch.png" />
+          <Image alt='Example Image' className="mx-auto rounded-2xl w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-50" src="sketch.png" />
         <Redo className='w-60 h-40  absolute z-10 rotate-[100deg] text-primary transform transition hover:scale-125 duration-700 ease-in-out hover:rotate-6' />
         </div>
         <div className="w-full xl:w-3/5 p-12 overflow-hidden">
-          <img className="mx-auto rounded-2xl  w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" src="result.png" />
+          <Image alt='Example Image' className="mx-auto rounded-2xl  w-full md:w-4/5 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" src="result.png" />
         </div>
 
         <div className="mx-auto md:pt-16">
