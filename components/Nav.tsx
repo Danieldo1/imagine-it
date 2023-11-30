@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const Nav = () => {
   return (
-    <nav className="border-b py-6 shadow-xl sticky top-0 bg-primary-foreground">
+    <nav className="border-b py-6 shadow-xl sticky top-0 bg-primary-foreground z-50">
       <div className="container mx-auto flex justify-between items-center">
         <h2 className="text-3xl font-bold text-center text1 tracking-tightest text-white bg-primary px-2">Draw-it</h2>
         <nav className="flex gap-4">
