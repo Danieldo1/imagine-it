@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm-run-all dev:init --parallel dev:backend dev:frontend",
-    "build": "tsc && next build",
+    "build": "next build",
     "dev:backend": "convex dev",
     "dev:frontend": "next dev --port 3001",
     "dev:init": "convex dev --once",
