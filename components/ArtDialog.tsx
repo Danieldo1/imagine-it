@@ -38,23 +38,29 @@ const ArtDialog: React.FC<ArtDialogProps> = ({
             </Button>
           )}
         </DialogTrigger>
+
         <DialogContent className="rounded-xl">
           <DialogHeader className="mt-2 text-center justify-center items-center">
             <DialogTitle>Here is your amazing art!</DialogTitle>
             <DialogDescription>{promptValue}</DialogDescription>
           </DialogHeader>
-          {artsQuery && artsQuery.length > 0 && artsQuery[0].result && (
-            <div className='w-full h-full'>
-              <Image
-              width={512}
-              height={512}
-           
-                src={artsQuery[0].result}
-                className="max-w-full h-auto' rounded-xl"
-                alt="Art result"
-              />
-            </div>
-          )}
+
+         {!isLoading ? (
+            artsQuery && artsQuery.length > 0 && artsQuery[0].result ? (
+                <div className='w-full h-full'>
+                  <Image
+                    width={512}
+                    height={512}
+                    src={artsQuery[0].result}
+                    className="max-w-full h-auto rounded-xl"
+                    alt="Art result"
+                  />
+                </div>
+        
+      ) : (<div className="flex justify-center items-center">
+      <Loader2 className="animate-spin h-8 w-8" />
+    </div>)
+      ) : null}
           <DialogFooter className="sm:justify-start">
             <DialogClose asChild>
               <Button type="button" variant="secondary">
